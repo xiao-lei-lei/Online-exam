@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head th:replace="fragments/head::app-head">
+</head>
+<body>
+
+	<div th:replace="fragments/navbar::app-navbarwhite"></div>
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-md-4 ml-auto">
+				<p class="text-right" id="timer"></p>
+			</div>
+		</div>
+		<div class="card" th:each="question:${questions}">
+			<div class="card-header">
+				<h1 class="h3" th:text="'Question '+${questions.number+1}+' of '+${questions.totalPages}"></h1>
+			</div>
+			<div class="card-body">
+				<p th:text="${question.questionText}"></p>
+					<form th:action="@{/exam/question}" method="POST" onsubmit="return myFunction()">
+						<input type="hidden" name="id" th:value="${question.id}">
+						<input type="hidden" name="page" th:value="${questions.number}">
+							
+						<div class="form-group">
+							<div><input type="radio" value="ans1" name="answer" id="ans1" /><label for="ans1" th:text="${question.ans1}"></label></div>
+							<div><input type="radio" value="ans2" name="answer" id="ans2" /><label for="ans2" th:text="${question.ans2}"></label></div>
+							<div><input type="radio" value="ans3" name="answer" id="ans3" /><label for="ans3" th:text="${question.ans3}"></label></div>
+							<div><input type="radio" value="ans4" name="answer" id="ans4" /><label for="ans4" th:text="${question.ans4}"></label></div>
+						</div>
+						<div class="form-group">
+							<input id="nextButton" type="submit" value="Next" class="btn btn-primary" th:value="${questions.number+1==questions.totalPages?'Finish':'Next'}"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	
+	<!--  
+	<div th:if="${questions.getNumber()+1<questions.getTotalPages()}">
+		<a th:href="@{/exam(page=${questions.getNumber()+1})}">Next</a>
+	</div>
+	-->
+	
+
+
+<script>
+
+function myFunction(){
+	
+	if(document.getElementById("ans1").checked || document.getElementById("ans2").checked || document.getElementById("ans3").checked || document.getElementById("ans4").checked){
+		return true; 
+	}else{
+		alert("please choose answer...");
+	return false;
+	}
+}
+
+// Set the date we're counting down to
+var countDownDate = [[${session.expiredTime}]];
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("timer").innerHTML ="Time remain: "+
+   minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer").innerHTML = "Time up!";
+    alert("Time up!");
+    window.location.href="/exam/finished";
+  }
+}, 1000);
+</script>
+
+	<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	
+</body>
+</html>

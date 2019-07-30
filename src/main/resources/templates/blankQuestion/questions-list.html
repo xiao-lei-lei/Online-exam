@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::app-head">
+</head>
+<body>
+	<div th:replace = "fragments/navbar::app-navbarwhite"></div>
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h1 class="h4 mb-0">Question Management<a class="btn btn-primary btn-sm float-right" 
+						th:href="@{/bquestions/new}"><i class="fas fa-plus"></i>Add</a>
+						</h1>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Question</th>
+									<th scope="col">CorrectAnswer</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="question:${questions}">
+									<td th:text="${question.id}" scope="row"></td>
+									<td th:text="${question.question}"></td>
+									<td th:text="${question.answer}"></td>
+									<td><a th:href="@{/bquestions/edit(id=${question.id})}"
+									class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+									<a th:href="@{/bquestions/delete(id=${question.id})}"
+									class="btn btn-danger btn-sm ml-md-1"><i class="fas fa-trash-alt"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+				<a th:href="@{/admin}" class="btn btn-secondary">Back</a>
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	
+	<!-- 
+	<p th:text="'Question No:'+${questions.getNumber()+1}+'/'+${questions.getTotalPages()}"></p>
+	<div th:if="${questions.getNumber()+1<questions.getTotalPages()}">
+		<a th:href="@{/questions(page=${questions.getNumber()+1})}">Next</a>
+	</div>
+	 -->
+</body>
+</html>

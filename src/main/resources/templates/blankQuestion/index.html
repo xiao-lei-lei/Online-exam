@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+	
+
+	<div class="container">
+		<div class="col-md-4 mx-auto my-4">
+		<h1>Create Question</h1>
+			<form action="#" th:action="@{/bquestions}" th:object="${questions}" method="POST">
+				<div class="form-group">
+					<label>Question : </label>
+					<textarea class="form-control" rows="5" cols="20" th:field="*{question}"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Answer : </label> <input class="form-control" th:field="*{answer}" type="text">
+				</div>
+				<input class="btn btn-primary col-md-4 form-control" type="submit" value="Create">
+				<a th:href="@{/bquestions}" class="btn btn-secondary">Back</a>
+			</form>
+			
+		</div>
+	</div>
+</body>
+</html>

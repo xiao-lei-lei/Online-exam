@@ -1,0 +1,23 @@
+html,
+body,
+#intro{
+	height:100%;
+}
+
+.navbar-brand{
+	font-weight:700;
+	font-size:26px;
+}
+
+.navbar{
+	background:rgba(0,0,0,0.7)!important;
+}
+
+#intro{
+	background:url("../images/backimg.jpg") no-repeat center center fixed;
+	background-size:cover;
+}
+
+#welcome-text,#secondary-text{
+	text-shadow:2px 2px 2px black;
+}

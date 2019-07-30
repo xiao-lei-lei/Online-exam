@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head::app-head">
+</head>
+<body>
+	<nav th:fragment="app-navbar"
+		class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark py-2">
+		<div class="container">
+		<a class="navbar-brand" th:href="@{/}"><span class="font-weight-light">Online</span>Exam</a>
+	
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">
+				<li class="nav-item my-3 my-lg-3"><a class="nav-link text-white"
+					th:href="@{/login}">Login <span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item ml-lg-3 my-3 my-lg-3"><a class="btn btn-secondary"
+					th:href="@{/register}">Register</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+				<li class="nav-item my-3 my-lg-3"><a class="nav-link"><i class="fas fa-user"></i>
+						<span sec:authentication="name"></span> <span class="sr-only">(current)</span>
+				</a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item my-3 my-lg-3"><a class="nav-link" th:href="@{/admin}">Admin Panel
+				</a></li>
+				<li class="nav-item ml-lg-3 my-3 my-lg-3"><a class="btn btn-secondary"
+					th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+	
+	<nav th:fragment="app-navbarwhite"
+		class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+		<div class="container">
+		<a class="navbar-brand" th:href="@{/}"><span class="font-weight-light">Online</span>Exam</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">
+				<li class="nav-item my-3 my-lg-3"><a class="nav-link text-white"
+					th:href="@{/login}">Login <span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item ml-lg-3 my-3 my-lg-3"><a class="btn btn-secondary"
+					th:href="@{/register}">Register</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+				<li class="nav-item my-3 my-lg-3"><a class="nav-link"><i class="fas fa-user"></i>
+						<span sec:authentication="name"></span> <span class="sr-only">(current)</span>
+				</a></li>
+				
+				<li class="nav-item ml-lg-3 my-3 my-lg-3"><a class="btn btn-secondary"
+					th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+	
+	<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	
+</body>
+</html>

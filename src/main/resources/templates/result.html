@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head::app-head">
+</head>
+<body>
+
+<div th:replace="fragments/navbar::app-navbarwhite"></div>
+	
+	<div class="container">
+	<h2 >Exam Result</h2>
+		<table class="table table-striped">
+  		<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Exam Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Result Date</th>
+      <th scope="col">Final Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>ITPEC</td>
+      <td><span sec:authentication="name"></span></td>
+      <td>4/3/2019</td>
+      <td ><h5 th:text="${mark}">mark</h5></td>
+    </tr>
+   
+  </tbody>
+</table>
+</div>
+	<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
